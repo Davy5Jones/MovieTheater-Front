@@ -1,0 +1,10 @@
+.Home {
+    display: flex;
+	align-items: center;
+    justify-content: center;
+}
+.Home h2{
+    color: whitesmoke;
+    
+
+}
