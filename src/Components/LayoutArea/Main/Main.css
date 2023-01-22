@@ -3,8 +3,7 @@
     grid-row: 10 span;
 
     background-color: #C191A1;
-	
-	
+    overflow-y: scroll;
 }
 .Routing{
     height:100%;

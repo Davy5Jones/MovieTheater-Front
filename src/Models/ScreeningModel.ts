@@ -1,7 +1,7 @@
-import { PageInfo, PageLinks } from "./BaseModels";
+import { Link, PageInfo, PageLinks } from "./BaseModels";
 export interface ScreeningLinks {
-  self: string;
-  movie: string;
+  self: Link;
+  movie: Link;
 }
 
 export interface ScreeningModelDto {
@@ -11,8 +11,8 @@ export interface ScreeningModelDto {
   screenTime: Date;
   seats: boolean[][];
   theaterName: string;
-  active: boolean;
   threeD: boolean;
+  active: boolean;
   _links: ScreeningLinks;
 }
 

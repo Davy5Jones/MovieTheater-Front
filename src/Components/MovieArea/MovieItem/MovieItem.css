@@ -1,3 +1,16 @@
 .MovieItem {
-	
+    border: 4px;
+    border-color: greenyellow;
+    margin: 5px;
+    grid-row: span 5 ;
+    grid-column: span 4 ;
+    border-style: dashed;	
+    
+}
+.MovieItem *{
+    margin: 5px;
+}
+.MovieItem img{
+    margin: 10px;
+    height: 140px;
 }

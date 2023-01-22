@@ -1,10 +1,10 @@
 
   export interface PageLinks {
-    first: string;
-    previous?: string;
-    self: string;
-    next?: string;
-    last: string;
+    first: Link;
+    prev?: Link;
+    self: Link;
+    next?: Link;
+    last: Link;
   }
 
    export interface PageInfo {
@@ -19,6 +19,10 @@
     password: string;
     stayLoggedIn: boolean;
    }
+
+    export interface Link {
+      href: string;
+    }
 
 
    

@@ -1,12 +1,11 @@
-.ScreeningList  {
-  text-align: center;
+.MovieScreenings {
+	text-align: center;
   height: 92%;
   display: grid;
   grid-template-columns: repeat(12,1fr);
-
     text-align: center;
+    
 }
-.ScreeningListWrapper  {
-	height: 100%;
-
+.MovieScreeningsWrapper{
+    	height: 100%;
 }

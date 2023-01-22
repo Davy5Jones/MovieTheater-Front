@@ -1,0 +1,8 @@
+.MovieScreeningItem {
+	    border: 4px;
+    border-color: greenyellow;
+    margin: 5px;
+    grid-row: 3 span;
+    grid-column:  3 span;
+    border-style: dashed;	
+}

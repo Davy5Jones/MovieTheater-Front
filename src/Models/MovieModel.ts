@@ -1,8 +1,13 @@
-import {PageInfo, PageLinks} from "./BaseModels";
+import exp from "constants";
+import {Link, PageInfo, PageLinks} from "./BaseModels";
   export interface MovieLinks {
-    self: string;
-    screenings: string;
+    self: Link;
+
+    screenings: Link;
   }
+    export interface RecommendedMovieList {
+      _embedded: MovieList;
+    }
 
   export interface MovieModelDto {
     id: string;
@@ -11,16 +16,18 @@ import {PageInfo, PageLinks} from "./BaseModels";
     duration: number;
     category: string;
     rating: number;
+    img:string;
+    trailer:string;
     active: boolean;
     _links: MovieLinks;
   }
-
-  export interface Content {
+  export interface MovieList {
     movieModelDtoList: MovieModelDto[];
   }
-  export interface RootObject {
-    _embedded: Content;
+  export interface MovieRootObject {
+    _embedded: MovieList;
     _links: PageLinks;
     page: PageInfo;
   }
+
 

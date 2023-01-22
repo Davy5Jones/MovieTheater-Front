@@ -1,6 +1,8 @@
+import { Link } from "./BaseModels";
+
   export interface Links {
-    self: string;
-    tickets: string;
+    self: Link;
+    tickets: Link;
   }
 
   export interface UserObject {

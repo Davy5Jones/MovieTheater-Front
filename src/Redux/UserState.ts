@@ -1,13 +1,16 @@
 import { User, UserObject } from "../Models/UserModel";
 
-export class AppState {
+export class UserState {
   // Step 1 - create the app state object
   public user: User = {
     details: {
-      id:0, emailAddress:"", customerName:"", _links:{self:"",tickets:""}
+      id: 0,
+      emailAddress: "",
+      customerName: "",
+      _links: { self: { href: "" }, tickets: { href: "" } },
     },
-    token: ""}
-
+    token: "",
+  };
 };
 
 
@@ -35,9 +38,9 @@ export function gotUserDetails(res: UserObject): UserAction {
 
 // Step 5 - Reducer function perform the required action
 export function userReducer(
-  currentState: AppState = new AppState(),
+  currentState: UserState = new UserState(),
   action: UserAction
-): AppState {
+): UserState {
   const newState = { ...currentState }; //Spread Operator // Copy
   switch (action.type) {
     case ActionType.GOT_USER_TOKEN: {

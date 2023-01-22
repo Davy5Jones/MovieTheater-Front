@@ -1,0 +1,14 @@
+.SingleTicket {
+      display: flex;
+    flex-direction: column;
+	border: 4px;
+    border-color: greenyellow;
+    margin: 5px;
+    grid-row: 10 span;
+    grid-column:  10 span;
+    max-width: 10 span;
+    max-height:10 span;
+    border-style: dashed;
+    align-items: center;
+    height: 90%;
+}

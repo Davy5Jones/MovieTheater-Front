@@ -1,0 +1,13 @@
+.Paginate {
+    bottom: 10px;
+
+}
+button{
+    background-color:rgb(179, 129, 201);
+    border: none;
+    padding: 10px;
+
+    border-radius: 10px;
+    color: white;
+    margin: 5px;
+}

@@ -31,6 +31,16 @@ function Menu(): JSX.Element {
             screenings
           </Link>
         )}
+        {token != "" && (
+          <Link className="link" to="movies">
+            movies
+          </Link>
+        )}
+        {token != "" && (
+          <Link className="link" to="tickets">
+            tickets
+          </Link>
+        )}
       </div>
     );
 }

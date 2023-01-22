@@ -5,13 +5,12 @@
     grid-row: 4 span;
     grid-column:  3 span;
     max-width: 4 span;
-    max-height:100%;
+    max-height:4 span;
     border-style: dashed;	
 }
 .ScreeningItem *{
     margin: 5px;
 }
-.ScreeningItem img{
-    margin: 10px;
-    height: 140px;
+.ScreeningItem > img{
+    object-fit:contain;
 }

@@ -1,0 +1,33 @@
+.SingleMovie {
+    border: 4px;
+    border-color: greenyellow;
+    margin: 5px;
+    grid-row: 10 span;
+    grid-column:  10 span;
+    max-width: 10 span;
+    max-height:10 span;
+    border-style: dashed;
+    align-items: center;
+    justify-content: center;	
+
+}
+
+.SingleMovie * {
+    margin :10px;
+}
+.SingleMovie img{
+    margin: 20px;
+    height: 315px;
+}
+iframe{
+    height: 315px;
+    width: 560px;
+    border: none;
+}
+
+.media{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
