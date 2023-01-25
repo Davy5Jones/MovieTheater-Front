@@ -4,31 +4,24 @@ import Menu from "./Components/LayoutArea/Menu/Menu";
 import Main from "./Components/LayoutArea/Main/Main";
 import Footer from "./Components/LayoutArea/Footer/Footer";
 import store from "./Redux/Store";
-import { gotUserDetails, gotUserToken } from "./Redux/UserState";
+import { gotUserLogged } from "./Redux/UserState";
 import { useEffect } from "react";
 import webApi from "./Services/WebApi";
 import notify from "./Services/NotificationService";
+import { useSelector } from "react-redux";
+import { UserObject } from "./Models/UserModel";
+import { useCookies } from "react-cookie";
 
-function init() {
-  const tokenString = localStorage.getItem("token");
-  if (tokenString !== null) {
-    store.dispatch(gotUserToken(tokenString));
-    webApi
-      .customerDetails()
-      .then((res) => {
-        store.dispatch(gotUserDetails(res.data));
-      })
-      .catch((err) => {
-        notify.error(err);
-        store.dispatch(gotUserToken(""));
-      });
-  }
-}
 
 function App() {
   useEffect(() => {
-    init();
-  }, [store.getState().userReducer.user.token]);
+      webApi.customerDetails().then((res) => {
+        console.log(res.data);
+        console.log("hi");
+        store.dispatch(gotUserLogged({ details: res.data, logged: true }));
+      })
+    
+  }, []);
 
   return (
     <div className="App">

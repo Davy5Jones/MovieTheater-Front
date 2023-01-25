@@ -7,14 +7,16 @@ import { LoginModel } from "../../Models/BaseModels";
 import webApi from "../../Services/WebApi";
 import notify from "../../Services/NotificationService";
 import store from "../../Redux/Store";
-import { gotUserToken } from "../../Redux/UserState";
 import { useEffect } from "react";
+import { gotUserLogged, UserState } from "../../Redux/UserState";
+import { useSelector } from "react-redux";
 function LoginPage(): JSX.Element {
+  console.log(store.getState().userReducer.user.logged);
   const navigate = useNavigate();
+  const logged = useSelector<UserState,boolean>(store => store.user?.logged)
   useEffect(() => {
-    if (store.getState().userReducer.user.token != "") navigate("/home");
-  }, [store.getState().userReducer.user.token]);
-  if (store.getState().userReducer.user.token != "") navigate("/home");
+    if (store.getState().userReducer.user.logged) navigate("/home");
+  }, [logged]);
   const schema = yup.object().shape({
     email: yup
       .string()
@@ -32,9 +34,6 @@ function LoginPage(): JSX.Element {
   } = useForm<LoginModel>({ mode: "all", resolver: yupResolver(schema) });
 
   const postLogin = async (obj: LoginModel) => {
-    if (store.getState().userReducer.user.token != "") {
-      navigate("/home");
-    }
     const credentials = {
       email: obj.email,
       password: obj.password,
@@ -43,13 +42,12 @@ function LoginPage(): JSX.Element {
     await webApi
       .customerLogin(credentials)
       .then((res) => {
-        notify.success("login successfully");
         console.log(res.data);
-        // Update global State
-        store.dispatch(gotUserToken(res.data));
-        setToken(res.data);
+        notify.success("login successfully");
+        // Update global State        
+        //store.dispatch(gotUserLogged({details:res.data,logged:true}));
+        
         //navigate("/todos");
-        navigate("/home");
       })
       .catch((err) => notify.error(err));
   };

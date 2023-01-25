@@ -1,7 +1,9 @@
 import { useEffect, useState } from "react";
-import { Navigate, Route, Routes} from "react-router-dom";
+import { useSelector } from "react-redux";
+import { Navigate, Route, Routes } from "react-router-dom";
 import App from "../../../App";
 import store from "../../../Redux/Store";
+import { UserState } from "../../../Redux/UserState";
 import LoginPage from "../../LoginPage/LoginPage";
 import MovieList from "../../MovieArea/MovieList/MovieList";
 import SingleMovie from "../../MovieArea/SingleMovie/SingleMovie";
@@ -15,72 +17,70 @@ import TicketList from "../../TicketArea/TicketList/TicketList";
 import "./Routing.css";
 
 function Routing(): JSX.Element {
-
-  const [token,setToken] =useState<string>("")
-  useEffect(()=>{
-    setToken(store.getState().userReducer.user.token)
-    return store.subscribe(()=>{
-      setToken(store.getState().userReducer.user.token)
-    })
-  },[])
-    return (
-      <div className="Routing">
-        <Routes>
-          <Route path="/" element={<App />} />
-          <Route path="home" element={<Home />} />
-          <Route index element={<Home />} />
-          <Route path="about" element={<About />} />
-          <Route path="*" element={<Page404 />} />
-          <Route
-            path="home/login"
-            element={token ? <Navigate to="/home" /> : <LoginPage />}
-          />
-          {
-            <Route
-              path="screenings"
-              element={
-                token ? <ScreeningList /> : <Navigate to="/home/login" />
-              }
-            />
-          }
-          {
-            <Route
-              path="movies"
-              element={token ? <MovieList /> : <Navigate to="/home/login" />}
-            />
-          }
-          {
-            <Route
-              path="tickets"
-              element={token ? <TicketList /> : <Navigate to="/home/login" />}
-            />
-          }
-          {
-            <Route
-              path="movies/:id"
-              element={token ? <SingleMovie /> : <Navigate to="/home/login" />}
-            />
-          }
-
-          {
-            <Route
-              path="screenings/:id"
-              element={
-                token ? <SingleScreening /> : <Navigate to="/home/login" />
-              }
-            />
-          }
-          {
-            <Route
-              path="tickets/:id"
-              element={
-                token ? <SingleTicket /> : <Navigate to="/home/login" />
-              }
-            />
-          }
-        </Routes>
-      </div>
+  const [logged, setLogged] = useState<boolean>(store.getState().userReducer.user.logged);
+  useEffect(() => {
+    return store.subscribe(() =>
+      setLogged(store.getState().userReducer.user.logged)
     );
+  }, []);
+  console.log(logged);
+  return (
+    <div className="Routing">
+      <Routes>
+        <Route path="/" element={<App />} />
+        <Route path="home" element={<Home />} />
+        <Route index element={<Home />} />
+        <Route path="about" element={<About />} />
+
+        <Route
+          path="home/login"
+          element={logged ? <Navigate to="/home" /> : <LoginPage />}
+        />
+
+        {
+          <Route
+            path="screenings"
+            element={logged ? <ScreeningList /> : <Navigate to="/home/login" />}
+          />
+        }
+        {
+          <Route
+            path="movies"
+            element={logged ? <MovieList /> : <Navigate to="/home/login" />}
+          />
+        }
+        {
+          <Route
+            path="tickets"
+            element={logged ? <TicketList /> : <Navigate to="/home/login" />}
+          />
+        }
+        {
+          <Route
+            path="movies/:id"
+            element={logged ? <SingleMovie /> : <Navigate to="/home/login" />}
+          />
+        }
+
+        {
+          <Route
+            path="screenings/:id"
+            element={
+              logged ? <SingleScreening /> : <Navigate to="/home/login" />
+            }
+          />
+        }
+        {
+          <Route
+            path="tickets/:id"
+            element={logged ? <SingleTicket /> : <Navigate to="/home/login" />}
+          />
+        }
+
+        <Route path="*" element={<Page404 />} />
+      </Routes>
+    </div>
+  );
 }
 
 export default Routing;

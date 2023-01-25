@@ -12,7 +12,9 @@ import { Link } from "./BaseModels";
     _links: Links;
   }
 
-   export interface User {
-    details: UserObject;
-    token: string;
-   }
+  export interface UserLogged {
+    details:UserObject
+    logged:boolean
+  }
+
+

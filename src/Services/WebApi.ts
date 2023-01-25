@@ -3,8 +3,8 @@ import { LoginModel } from "../Models/BaseModels";
 import { ScreeningModelDto, ScreeningRootObject } from "../Models/ScreeningModel";
 import { UserObject } from "../Models/UserModel";
 import global from "./ConstantService";
-import tokenAxios from "./AxiosIntreceptor";
-import { MovieList, MovieModelDto, MovieRootObject, RecommendedMovieList } from "../Models/MovieModel";
+import axiosInterceptor from "./AxiosInterceptor";
+import {  MovieModelDto, MovieRootObject, RecommendedMovieList } from "../Models/MovieModel";
 import { TicketDao, TicketDto, TicketPage } from "../Models/TicketModels";
 
 
@@ -12,73 +12,87 @@ class WebApi {
   private baseUrl = global.urls;
 
   public customerLogin(login: LoginModel) {
-    return axios.post<string>(
+    return axiosInterceptor.post<UserObject>(
       "http://localhost:8080/home/login/customer",
-      login
+      login,
+      { withCredentials: true }
     );
   }
   public customerDetails(): Promise<AxiosResponse<UserObject>> {
-    return tokenAxios.get<UserObject>("http://localhost:8080/api/customer");
+    return axiosInterceptor.get<UserObject>(
+      "http://localhost:8080/api/customer",
+      { withCredentials: true }
+    );
   }
 
   public screeningPage(
     url: string
   ): Promise<AxiosResponse<ScreeningRootObject>> {
-    return tokenAxios.get<ScreeningRootObject>(
-      url || "http://localhost:8080/api/customer/screenings"
+    return axiosInterceptor.get<ScreeningRootObject>(
+      url || "http://localhost:8080/api/customer/screenings",
+      { withCredentials: true }
     );
   }
   public screeningPageByMovieId(
     movieId: string
   ): Promise<AxiosResponse<ScreeningRootObject>> {
-    return tokenAxios.get<ScreeningRootObject>(
+    return axiosInterceptor.get<ScreeningRootObject>(
       "http://localhost:8080/api/customer/screenings",
       {
         params: {
           movieId: movieId,
-        },
+        }
+        ,
+      headers:{ withCredentials: true }
       }
     );
   }
   public moviePage(url: string): Promise<AxiosResponse<MovieRootObject>> {
-    return tokenAxios.get<MovieRootObject>(
-      url || "http://localhost:8080/api/customer/movies"
+    return axiosInterceptor.get<MovieRootObject>(
+      url || "http://localhost:8080/api/customer/movies",
+      { withCredentials: true }
     );
   }
   public recommendedMovies(): Promise<AxiosResponse<RecommendedMovieList>> {
-    return tokenAxios.get<RecommendedMovieList>(
-      "http://localhost:8080/api/customer/movies/recommended"
+    return axiosInterceptor.get<RecommendedMovieList>(
+      "http://localhost:8080/api/customer/movies/recommended",
+      { withCredentials: true }
     );
   }
 
   public singleMovie(id: string): Promise<AxiosResponse<MovieModelDto>> {
-    return tokenAxios.get<MovieModelDto>(
-      "http://localhost:8080/api/customer/movies/" + id
+    return axiosInterceptor.get<MovieModelDto>(
+      "http://localhost:8080/api/customer/movies/" + id,
+      { withCredentials: true }
     );
   }
 
   public singleScreening(
     id: string
   ): Promise<AxiosResponse<ScreeningModelDto>> {
-    return tokenAxios.get<ScreeningModelDto>(
-      "http://localhost:8080/api/customer/screenings/" + id
+    return axiosInterceptor.get<ScreeningModelDto>(
+      "http://localhost:8080/api/customer/screenings/" + id,
+      { withCredentials: true }
     );
   }
 
   public BuyTicket(ticket: TicketDao): Promise<AxiosResponse<TicketDto>> {
-    return tokenAxios.post<TicketDto>(
+    return axiosInterceptor.post<TicketDto>(
       "http://localhost:8080/api/customer/purchases",
-      ticket
+      ticket,
+      { withCredentials: true }
     );
   }
   public GetTickets(url: string): Promise<AxiosResponse<TicketPage>> {
-    return tokenAxios.get<TicketPage>(
-      url || "http://localhost:8080/api/customer/purchases"
+    return axiosInterceptor.get<TicketPage>(
+      url || "http://localhost:8080/api/customer/purchases",
+      { withCredentials: true }
     );
   }
   public SingleTicket(id: string): Promise<AxiosResponse<TicketDto>> {
-    return tokenAxios.get<TicketDto>(
-      "http://localhost:8080/api/customer/purchases/" + id
+    return axiosInterceptor.get<TicketDto>(
+      "http://localhost:8080/api/customer/purchases/" + id,
+      { withCredentials: true }
     );
   }
 }
